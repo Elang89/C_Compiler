@@ -24,7 +24,7 @@ int main()
 		b_file_path = validate_file_path(file_path);
 	}
 
-	scanner(file_path);
+	printf("%s", scanner(file_path));
  
 
 	printf("File found, generating output... \n");

@@ -4,29 +4,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "reserved_words.h"
 
-
-void scanner(char * file_path)
+token scanner(char * file_path)
 {
 	FILE * file;
-	int input_character, c;
+	int [10] word;
+	int input_character;
+	int temp_character;
 	file = fopen(file_path, "r");
+
+	if(fgetc(file) == EOF)
+	{
+		printf("End of File");
+	}
 
 	while((input_character = fgetc(file)) != EOF)
 	{
 		if (isspace(input_character))
 		{
 			continue;
-
 		}
 		else if (isalpha(input_character))
 		{
-			buffer_char(input_character);
-			for(c = getchar(); isalmun(c) || c == '_'; c = getchar())
+			insert_character(word, input_character)
+			for(temp_character = fgetc(file); isalnum(temp_character) || 
+				temp_character == '_'; temp_character = fgetc(file))
 			{
-				buffer_char(c);
+				
 			}
-			ungetc(c, stdin);
+			ungetc(temp_character, file);
 			return check_reserved();
 		} 
 
