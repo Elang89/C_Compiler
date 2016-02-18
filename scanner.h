@@ -13,29 +13,33 @@ token scanner(char * file_path)
 	int temp_character;
 	file = fopen(file_path, "r");
 
-	if(feof(file))
-	{
-		printf("End of File");
-	}
+
+//	if(feof(file))
+//	{
+//		printf("End of File"); // Debe retornar SCANEOF
+//	}
 
 	while((input_character = fgetc(file)) != EOF)
 	{
+		printf("%c", input_character);
 		if (isspace(input_character))
 		{
 			continue;
 		}
 		else if (isalpha(input_character))
 		{
+			buffer_char(input_character);
 			for(temp_character = fgetc(file); isalnum(temp_character) || 
 				temp_character == '_'; temp_character = fgetc(file))
 			{
-				
+				buffer_char(temp_character);
 			}
 			ungetc(temp_character, file);
 			return check_reserved();
 		} 
 
-	}	
+	}
+	return BEGIN;	
 
 }
 

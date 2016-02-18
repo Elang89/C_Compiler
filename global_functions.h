@@ -32,18 +32,25 @@ void clear_buffer()
 	}
 }
 
-int str_compare(char string_compare[128])
-{
-	if (strcmp(string_compare, token_buffer) == 0)
-	{
-		return 0;
-	}
-	return -1;
-}
-
 token check_reserved()
 {
-	
+	if(strcmp("begin", token_buffer) == 0)
+	{
+		printf("begin");
+		return BEGIN;
+	}
+	else if (strcmp("end", token_buffer) == 0)
+	{
+		return END;
+	}
+	else if (strcmp("read", token_buffer) == 0)
+	{
+		return READ;
+	}
+	else if (strcmp("write", token_buffer) == 0)
+	{
+		return WRITE;
+	}
 } 
 
 

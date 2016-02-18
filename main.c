@@ -23,6 +23,7 @@ int main()
 		file_path[ strcspn(file_path, "\n") ] = '\0';
 		b_file_path = validate_file_path(file_path);
 	}
+	scanner(file_path);
 	printf("File found, generating output... \n");
 	return 0;
 }
