@@ -4,12 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "reserved_words.h"
+#include "global_functions.h"
 
 token scanner(char * file_path)
 {
 	FILE * file;
-	int [10] word;
 	int input_character;
 	int temp_character;
 	file = fopen(file_path, "r");
@@ -27,7 +26,6 @@ token scanner(char * file_path)
 		}
 		else if (isalpha(input_character))
 		{
-			insert_character(word, input_character)
 			for(temp_character = fgetc(file); isalnum(temp_character) || 
 				temp_character == '_'; temp_character = fgetc(file))
 			{
