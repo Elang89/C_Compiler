@@ -7,32 +7,41 @@
 int main()
 {
 
-	int b_file_path;
 	char input_character;
-	char file_path[1024];
-	printf("Specify a valid file path to compile file: ");
+	char word[32];
+	printf("Specify a word: ");
 	
-	fgets(file_path, sizeof(file_path), stdin);
-	file_path[ strcspn(file_path, "\n") ] = '\0';
-	b_file_path = validate_file_path(file_path);
+	fgets(word, sizeof(word), stdin);
+	word[ strcspn(word, "\n") ] = '\0';
+	input_character = getchar();
 
-	while(b_file_path == 0)
+	if(isspace(input_character))
+	{
+		printf("%c", input_character);
+	}
+	else
+	{
+		printf("no word");
+	}
+
+	
+
+	/*while(b_file_path == 0)
 	{
 		printf("Invalid file path, please specify a valid file path: ");
 		fgets(file_path, sizeof(file_path), stdin);
 		file_path[ strcspn(file_path, "\n") ] = '\0';
 		b_file_path = validate_file_path(file_path);
-	}
-	scanner(file_path);
-	printf("File found, generating output... \n");
+	}*/
 	return 0;
 }
 
-int validate_file_path(const char* path)
+/*int validate_file_path(const char* path)
 {
 	if(access(path, F_OK)!= -1)
 	{
 		return 1;
 	}
 	return 0;
-}
+	
+}*/
