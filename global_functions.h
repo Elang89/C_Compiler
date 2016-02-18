@@ -9,6 +9,7 @@ typedef enum token_types{
 } token;
 
 char token_buffer[128];
+unsigned long file_position = 0;
 
 void buffer_char(int temp_char) 
 {
@@ -36,11 +37,12 @@ token check_reserved()
 {
 	if(strcmp("begin", token_buffer) == 0)
 	{
-		printf("begin");
+		printf("begin \n");
 		return BEGIN;
 	}
 	else if (strcmp("end", token_buffer) == 0)
 	{
+		printf("end \n");
 		return END;
 	}
 	else if (strcmp("read", token_buffer) == 0)
@@ -51,7 +53,10 @@ token check_reserved()
 	{
 		return WRITE;
 	}
+	else 
+	{
+		printf("ID");
+		return ID;
+	}
 } 
-
-
 #endif

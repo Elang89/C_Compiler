@@ -4,44 +4,30 @@
 #include <string.h>
 #include "scanner.h"
 
-int main()
+int main(int argc, char *argv[])
 {
+	FILE * file;
+	char * file_name;
+	int i = 0;
 
-	char input_character;
-	char word[32];
-	printf("Specify a word: ");
-	
-	fgets(word, sizeof(word), stdin);
-	word[ strcspn(word, "\n") ] = '\0';
-	input_character = getchar();
+	file_name = argv[1];
+	printf(validate_file_path(file_name) ? "File found \n" : "File not found \n");
+	file = fopen(file_name, "r");
 
-	if(isspace(input_character))
+	while(!feof(file))
 	{
-		printf("%c", input_character);
+		scanner(file);
 	}
-	else
-	{
-		printf("no word");
-	}
-
 	
-
-	/*while(b_file_path == 0)
-	{
-		printf("Invalid file path, please specify a valid file path: ");
-		fgets(file_path, sizeof(file_path), stdin);
-		file_path[ strcspn(file_path, "\n") ] = '\0';
-		b_file_path = validate_file_path(file_path);
-	}*/
+	fclose(file);
 	return 0;
 }
 
-/*int validate_file_path(const char* path)
+int validate_file_path(const char* path)
 {
 	if(access(path, F_OK)!= -1)
 	{
 		return 1;
 	}
 	return 0;
-	
-}*/
+}
