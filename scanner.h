@@ -14,7 +14,7 @@ token scanner(char * file_path)
 	int temp_character;
 	file = fopen(file_path, "r");
 
-	if(fgetc(file) == EOF)
+	if(feof(file))
 	{
 		printf("End of File");
 	}
