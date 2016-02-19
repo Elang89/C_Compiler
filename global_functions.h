@@ -55,7 +55,7 @@ token check_reserved()
 	}
 	else 
 	{
-		printf("ID");
+		printf("ID \n");
 		return ID;
 	}
 } 
