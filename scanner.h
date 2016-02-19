@@ -13,14 +13,14 @@ token scanner(FILE * file)
 	clear_buffer();
 	if(feof(file))
 	{
-		return SCANEOF;
+		return SCANEOF; // token que indica que ya terminó de leer.
 	}
 
 	input_character = fgetc(file);
 
 	if(isspace(input_character))
 	{
-		return;
+		return; // no retorna nada cuando es espacio en blanco. 
 	}
 	else if (isalpha(input_character))
 	{
@@ -75,15 +75,13 @@ token scanner(FILE * file)
 		temp_character = fgetc(file);
 		if (temp_character = '=')
 		{
-			file_position = ftell(file);
 			printf("ASSIGNOP \n");
 			return ASSIGNOP;
 		}
 		else
 		{
 			ungetc(temp_character, file);
-			file_position = 0;
-			printf("error \n");
+			printf("error \n"); // hacer lexical error
 		}
 	}
 	else if (input_character == '-')
@@ -103,8 +101,9 @@ token scanner(FILE * file)
 			return MINUSOP;
 		}
 	}
-	else
+	else if (!(input_character != EOF))
 	{
+		printf("%c\n",input_character);
 		printf("error \n");
 		return;
 	}

@@ -47,16 +47,19 @@ token check_reserved()
 	}
 	else if (strcmp("read", token_buffer) == 0)
 	{
+		printf("READ \n");
 		return READ;
 	}
 	else if (strcmp("write", token_buffer) == 0)
 	{
+		printf("WRITE \n");
 		return WRITE;
 	}
 	else 
 	{
 		printf("ID \n");
-		return ID;
+		return ID; // Retorna variables ya que es un identificador.
 	}
 } 
+
 #endif
