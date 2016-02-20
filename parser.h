@@ -77,6 +77,45 @@ void statement(void)
 			syntax_error(tok);
 			break;
 	}
-
 }
+
+void id_list(void)
+{
+	// <id_list> ::= ID { , ID}
+	match(ID);
+	while(next_token() == COMA)
+	{
+		match(COMMA);
+		match(ID);
+	}
+}
+
+void expression(void)
+{
+	token t;
+	/*
+	*	<expression> ::= <primary>{<add op><primary>}
+	*/
+	
+	primary();
+	
+	for(t = next_token(); t == PLUSOP || t == MINUSOP; t = next_token())
+	{
+		add_op();
+		primary();
+	}
+}
+
+void expr_list(void)
+{
+	// <expr_list> ::= <expression>{ , <expression> }
+	expression();
+	while(next_token() == COMMA)
+	{
+		match(COMMA);
+		expression();
+	}
+}
+
+
 #endif
