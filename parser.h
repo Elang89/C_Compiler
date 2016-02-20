@@ -1,5 +1,7 @@
 #ifndef PARSER_H_INCLUDED
 #define PARSER_H_INCLUDED
+#define true 1
+#define false (!true)
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -12,7 +14,7 @@ void system_goal(void)  // We must match a token sequence generate by program fo
 	match(SCANEOF); 
 }
 
-void program()
+void program(void)
 {
 	/* <program> ::= BEGIN <statement list> END*/
 	match(BEGIN);
@@ -24,7 +26,7 @@ void program()
 // si es termianl se pone el First(A) y si es no terminal
 // se nonterminal se compila en First(B)
 
-void statement_list()
+void statement_list(void)
 {
 	/*
 	* <statement list> ::= <statement> {<statement>} 
@@ -32,6 +34,7 @@ void statement_list()
 	*/
 
 	statement();
+
 	while(true)
 	{
 		switch(next_token())// return the next token
@@ -57,7 +60,7 @@ void statement(void)
 			match(ASSIGNOP);
 			expression();
 			match(SEMICOLON);
-			brea;
+			break;
 		case READ:
 			// <Statement> ::= READ(<id list>);
 			match(READ);
