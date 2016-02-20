@@ -117,5 +117,45 @@ void expr_list(void)
 	}
 }
 
+void add_op(void)
+{
+	token tok = next_token();
+	// <addop> ::= PLUSOP | MINUSOP 
+	if(tok == PLUSOP || tok == MINUSOP)
+	{
+		match(tok);
+	}
+	else
+	{
+		syntax_error(tok);
+	}
+}
+
+void primary(void)
+{
+	token tok = next_token();
+
+	switch(tok)
+	{
+		case LPAREN:
+			// <primary>(<expression>)
+			match(LPAREN);
+			expression();
+			match(RPAREN);
+			break;
+		case ID:
+			//<primary> ::= ID
+			match(ID);
+			break;
+		case INTLITERAL:
+			// <primary> ::= INTLITERAL
+			match(INTLITERAL);
+			break;
+		default:
+			syntax_error(tok);
+			break; 
+	}
+}
+
 
 #endif
