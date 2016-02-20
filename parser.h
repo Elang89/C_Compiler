@@ -6,12 +6,42 @@
 #include <string.h>
 #include <ctype.h>
 #include "global_functions.h"
+#include <stdbool.h>
 
-void system_goal(void)  // We must match a token sequence generate by program followed bt SCANOF
+// implementar
+bool match(token tos)
 {
-	/* <system goal> ::= <program> SCANEOF */
-	program();
-	match(SCANEOF); 
+	return true;
+}
+token next_token(){
+	return;
+}
+
+void primary(void)
+{
+	token tok = next_token();
+
+	switch(tok)
+	{
+		case LPAREN:
+			// <primary>(<expression>)
+			match(LPAREN);
+			expression();
+			match(RPAREN);
+			break;
+		case ID:
+			//<primary> ::= ID
+			match(ID);
+			break;
+		case INTLITERAL:
+			// <primary> ::= INTLITERAL
+			match(INTLITERAL);
+			break;
+		default:
+			printf("syntax_error \n");
+			//syntax_error(tok);
+			break; 
+	}
 }
 
 void program(void)
@@ -22,66 +52,12 @@ void program(void)
 	match(END);
 }
 
-// va buscando el siguiente token y si hay statements opcionales
-// si es termianl se pone el First(A) y si es no terminal
-// se nonterminal se compila en First(B)
-
-void statement_list(void)
+void system_goal(void)  // We must match a token sequence generate by program followed bt SCANOF
 {
-	/*
-	* <statement list> ::= <statement> {<statement>} 
-	*
-	*/
-
-	statement();
-
-	while(true)
-	{
-		switch(next_token())// return the next token
-		{
-			case ID:
-			case READ:
-			case WRITE:
-				statement();
-				break;
-			default:
-				return;
-		}
-	}
+	/* <system goal> ::= <program> SCANEOF */
+	program();
+	match(SCANEOF); 
 }
-void statement(void)
-{
-	token tok = next_token();
-	switch(tok)
-	{
-		case ID:
-			// <statement> ::= <expression>;
-			match(ID);
-			match(ASSIGNOP);
-			expression();
-			match(SEMICOLON);
-			break;
-		case READ:
-			// <Statement> ::= READ(<id list>);
-			match(READ);
-			match(LPAREN);
-			id_list();
-			match(SEMICOLON);
-			break;
-		case WRITE:
-			// <statement> ::= WRITE (<expr list>);
-			match(WRITE);
-			match(LPAREN);
-			expr_list();
-			match(RPAREN);
-			match(SEMICOLON);
-			break;
-		default:
-			syntax_error(tok);
-			break;
-	}
-}
-
 void id_list(void)
 {
 	// <id_list> ::= ID { , ID}
@@ -90,6 +66,20 @@ void id_list(void)
 	{
 		match(COMMA);
 		match(ID);
+	}
+}
+void add_op(void)
+{
+	token tok = next_token();
+	// <addop> ::= PLUSOP | MINUSOP 
+	if(tok == PLUSOP || tok == MINUSOP)
+	{
+		match(tok);
+	}
+	else
+	{
+		printf("syntax_error \n");
+		//syntax_error(tok);
 	}
 }
 
@@ -120,45 +110,67 @@ void expr_list(void)
 	}
 }
 
-void add_op(void)
-{
-	token tok = next_token();
-	// <addop> ::= PLUSOP | MINUSOP 
-	if(tok == PLUSOP || tok == MINUSOP)
-	{
-		match(tok);
-	}
-	else
-	{
-		syntax_error(tok);
-	}
-}
+// va buscando el siguiente token y si hay statements opcionales
+// si es termianl se pone el First(A) y si es no terminal
+// se nonterminal se compila en First(B)
 
-void primary(void)
+void statement(void)
 {
-	token tok = next_token();
-
-	switch(tok)
+	token tok_2 = next_token();
+	switch(tok_2)
 	{
-		case LPAREN:
-			// <primary>(<expression>)
-			match(LPAREN);
-			expression();
-			match(RPAREN);
-			break;
 		case ID:
-			//<primary> ::= ID
+			// <statement> ::= <expression>;
 			match(ID);
+			match(ASSIGNOP);
+			expression();
+			match(SEMICOLON);
 			break;
-		case INTLITERAL:
-			// <primary> ::= INTLITERAL
-			match(INTLITERAL);
+		case READ:
+			// <Statement> ::= READ(<id list>);
+			match(READ);
+			match(LPAREN);
+			id_list();
+			match(SEMICOLON);
+			break;
+		case WRITE:
+			// <statement> ::= WRITE (<expr list>);
+			match(WRITE);
+			match(LPAREN);
+			expr_list();
+			match(RPAREN);
+			match(SEMICOLON);
 			break;
 		default:
-			syntax_error(tok);
-			break; 
+			printf("syntax_error\n");
+			//syntax_error(tok);
+			break;
 	}
 }
 
+
+void statement_list(void)
+{
+	/*
+	* <statement list> ::= <statement> {<statement>} 
+	*
+	*/
+
+	statement();
+
+	while(true)
+	{
+		switch(next_token())// return the next token
+		{
+			case ID:
+			case READ:
+			case WRITE:
+				statement();
+				break;
+			default:
+				return;
+		}
+	}
+}
 
 #endif
