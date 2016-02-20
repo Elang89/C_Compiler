@@ -86,7 +86,7 @@ void id_list(void)
 {
 	// <id_list> ::= ID { , ID}
 	match(ID);
-	while(next_token() == COMA)
+	while(next_token() == COMMA)
 	{
 		match(COMMA);
 		match(ID);
