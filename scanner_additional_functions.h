@@ -1,15 +1,9 @@
-#ifndef RESERVED_WORDS_H_INCLUDED
-#define RESERVED_WORDS_H_INCLUDED
-
-typedef enum token_types{                 
-	BEGIN, END, READ, WRITE, ID,
-	INTLITERAL, LPAREN, RPAREN,
-	SEMICOLON, COMMA, ASSIGNOP,
-	PLUSOP, MINUSOP, SCANEOF
-} token;
-
-char token_buffer[128];
-unsigned long file_position = 0;
+#include <stdlib.h>
+#include <string.h>
+#include "scanner.h"
+#include "token_types.h"
+#ifndef SCANNER_ADDITIONAL_FUNCTIONS_H_INCLUDED
+#define SCANNER_ADDITIONAL_FUNCTIONS_H_INCLUDED
 
 void buffer_char(int temp_char) 
 {
@@ -62,4 +56,8 @@ token check_reserved()
 	}
 } 
 
+void lexical_error(int character)
+{
+	printf("Error '%c' in line %d. \n", character, file_line);
+}
 #endif

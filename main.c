@@ -4,27 +4,17 @@
 #include <string.h>
 #include "scanner.h"
 #include "parser.h"
+#include "token_types.h"
+
 
 int main(int argc, char *argv[])
 {
-	FILE * file;
 	char * file_name;
-	int c;
-
-	int i = 0;
-
 	file_name = argv[1];
 	printf(validate_file_path(file_name) ? "File found \n" : "File not found \n");
 	file = fopen(file_name, "r");
-
-	while((c = fgetc(file)) != EOF)
-	{
-		ungetc(c, file);
-		scanner(file);
-	}
-	
+	system_goal();
 	fclose(file);
-	statement_list();
 	return 0;
 }
 

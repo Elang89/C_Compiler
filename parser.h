@@ -1,25 +1,14 @@
 #ifndef PARSER_H_INCLUDED
 #define PARSER_H_INCLUDED
-#define true 1
-#define false (!true)
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "global_functions.h"
 #include <stdbool.h>
+#include "parser_additional_functions.h"
 
-// implementar
-bool match(token tos)
+void primary()
 {
-	return true;
-}
-token next_token(){
-	return;
-}
-
-void primary(void)
-{
-	token tok = next_token();
+	//token tok = next_token();
 
 	switch(tok)
 	{
@@ -38,13 +27,12 @@ void primary(void)
 			match(INTLITERAL);
 			break;
 		default:
-			printf("syntax_error \n");
-			//syntax_error(tok);
+			syntax_error(tok);
 			break; 
 	}
 }
 
-void program(void)
+void program()
 {
 	/* <program> ::= BEGIN <statement list> END*/
 	match(BEGIN);
@@ -52,13 +40,13 @@ void program(void)
 	match(END);
 }
 
-void system_goal(void)  // We must match a token sequence generate by program followed bt SCANOF
+void system_goal()  // We must match a token sequence generate by program followed bt SCANOF
 {
 	/* <system goal> ::= <program> SCANEOF */
 	program();
 	match(SCANEOF); 
 }
-void id_list(void)
+void id_list()
 {
 	// <id_list> ::= ID { , ID}
 	match(ID);
@@ -68,7 +56,7 @@ void id_list(void)
 		match(ID);
 	}
 }
-void add_op(void)
+void add_op()
 {
 	token tok = next_token();
 	// <addop> ::= PLUSOP | MINUSOP 
@@ -78,12 +66,11 @@ void add_op(void)
 	}
 	else
 	{
-		printf("syntax_error \n");
-		//syntax_error(tok);
+		syntax_error(tok);
 	}
 }
 
-void expression(void)
+void expression()
 {
 	token t;
 	/*
@@ -99,7 +86,7 @@ void expression(void)
 	}
 }
 
-void expr_list(void)
+void expr_list()
 {
 	// <expr_list> ::= <expression>{ , <expression> }
 	expression();
@@ -114,7 +101,7 @@ void expr_list(void)
 // si es termianl se pone el First(A) y si es no terminal
 // se nonterminal se compila en First(B)
 
-void statement(void)
+void statement()
 {
 	token tok_2 = next_token();
 	switch(tok_2)
@@ -142,14 +129,13 @@ void statement(void)
 			match(SEMICOLON);
 			break;
 		default:
-			printf("syntax_error\n");
-			//syntax_error(tok);
+			syntax_error(tok_2);
 			break;
 	}
 }
 
 
-void statement_list(void)
+void statement_list()
 {
 	/*
 	* <statement list> ::= <statement> {<statement>} 
