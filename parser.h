@@ -8,7 +8,7 @@
 
 void primary()
 {
-	//token tok = next_token();
+	token tok = next_token();
 
 	switch(tok)
 	{
@@ -27,6 +27,7 @@ void primary()
 			match(INTLITERAL);
 			break;
 		default:
+			printf("primary error \n");
 			syntax_error(tok);
 			break; 
 	}
@@ -46,6 +47,7 @@ void system_goal()  // We must match a token sequence generate by program follow
 	program();
 	match(SCANEOF); 
 }
+
 void id_list()
 {
 	// <id_list> ::= ID { , ID}
@@ -66,6 +68,7 @@ void add_op()
 	}
 	else
 	{
+		printf("addop error");
 		syntax_error(tok);
 	}
 }
@@ -103,8 +106,8 @@ void expr_list()
 
 void statement()
 {
-	token tok_2 = next_token();
-	switch(tok_2)
+	token tok = next_token();
+	switch(tok)
 	{
 		case ID:
 			// <statement> ::= <expression>;
@@ -118,6 +121,7 @@ void statement()
 			match(READ);
 			match(LPAREN);
 			id_list();
+			match(RPAREN);
 			match(SEMICOLON);
 			break;
 		case WRITE:
@@ -129,7 +133,8 @@ void statement()
 			match(SEMICOLON);
 			break;
 		default:
-			syntax_error(tok_2);
+			printf("statement error \n");
+			syntax_error(tok);
 			break;
 	}
 }

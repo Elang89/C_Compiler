@@ -31,27 +31,27 @@ token check_reserved()
 {
 	if(strcmp("begin", token_buffer) == 0)
 	{
-		printf("begin \n");
+		//printf("BEGIN \n");
 		return BEGIN;
 	}
 	else if (strcmp("end", token_buffer) == 0)
 	{
-		printf("end \n");
+		//printf("END \n");
 		return END;
 	}
 	else if (strcmp("read", token_buffer) == 0)
 	{
-		printf("READ \n");
+		//printf("READ \n");
 		return READ;
 	}
 	else if (strcmp("write", token_buffer) == 0)
 	{
-		printf("WRITE \n");
+		//printf("WRITE \n");
 		return WRITE;
 	}
 	else 
 	{
-		printf("ID \n");
+		//printf("ID \n");
 		return ID; // Retorna variables ya que es un identificador.
 	}
 } 

@@ -2,15 +2,12 @@
 #define PARSER_ADDITIONAL_FUNCTIONS_H_INCLUDED
 #include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include "scanner.h"
 #include "token_types.h"
-	
 
-token next_token()
-{
-	token tok = scanner();
-	return tok;
-}
+
+int next_tok_flag; 
 
 void syntax_error(token tok)
 {
@@ -56,20 +53,35 @@ void syntax_error(token tok)
 			printf("Error ID \n");
 			break;
 	}
+	exit(0);
+}
+
+token next_token()
+{
+	return current_token;
 }
 
 void match(token tok)
 {
-	token matching_token = next_token();
-	if(matching_token == tok)
+	print_token(current_token);
+	if(current_token == NULL) 
 	{
-		current_token = tok;
+		current_token = scanner();
+	}
+
+	if(tok == BEGIN)
+	{
+		current_token = scanner();
+	}
+	else if(tok == current_token)
+	{
+		current_token = scanner();
 	}
 	else
 	{
+		printf("match error \n");
 		syntax_error(tok);
 	}
-	
 }
 
 #endif 

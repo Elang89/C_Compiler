@@ -12,10 +12,6 @@ token scanner()
 	int temp_character;
 
 	clear_buffer();
-	if(feof(file))
-	{
-		return SCANEOF; // token que indica que ya terminó de leer.
-	}
 
 	while((input_character = fgetc(file)) != EOF)
 	{
@@ -49,32 +45,32 @@ token scanner()
 				buffer_char(temp_character);
 			}
 			ungetc(temp_character, file);
-			printf("INTLITERAL \n");
+			//printf("INTLITERAL \n");
 			return INTLITERAL;
 		} 
 		else if (input_character == '(')
 		{
-			printf("RPAREN \n");
-			return RPAREN;
+			//printf("RPAREN \n");
+			return LPAREN;
 		} 
 		else if (input_character == ')')
 		{
-			printf("LPAREN \n");
-			return LPAREN;
+			//printf("LPAREN \n");
+			return RPAREN;
 		}
 		else if (input_character == ';')
 		{
-			printf("SEMICOLON \n");
+			//printf("SEMICOLON \n");
 			return SEMICOLON;
 		}
 		else if (input_character == ',')
 		{
-			printf("COMMA \n");
+			//printf("COMMA \n");
 			return COMMA;
 		}
 		else if (input_character == '+')
 		{
-			printf("PLUSOP \n");
+			//printf("PLUSOP \n");
 			return PLUSOP;
 		}
 		else if (input_character == ':')
@@ -82,7 +78,7 @@ token scanner()
 			temp_character = fgetc(file);
 			if (temp_character == '=')
 			{
-				printf("ASSIGNOP \n");
+			//	printf("ASSIGNOP \n");
 				return ASSIGNOP;
 			}
 			else
@@ -99,12 +95,12 @@ token scanner()
 				do
 				{
 					input_character = fgetc(file);
-				} while (input_character != "\n");
+				} while (input_character != '\n');
 			}
 			else 
 			{
 				ungetc(temp_character, file);
-				printf("MINUSOP \n");
+		//		printf("MINUSOP \n");
 				return MINUSOP;
 			}
 		}
@@ -112,6 +108,12 @@ token scanner()
 		{
 			lexical_error(input_character);
 		}
+	}
+
+	if(feof(file))
+	{
+		//printf("SCANEOF \n");
+		return SCANEOF; // token que indica que ya terminó de leer.
 	}
 }
 
