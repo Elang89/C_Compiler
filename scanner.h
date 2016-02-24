@@ -18,7 +18,7 @@ token scanner()
 		
 		if(input_character == '\n')
 		{
-			file_line++;
+			file_line++;// esta variable determina la línea de código donde está el error
 		}
 
 		if(isspace(input_character))
