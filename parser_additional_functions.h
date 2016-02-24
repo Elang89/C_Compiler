@@ -14,48 +14,60 @@ void syntax_error(token tok)
 	switch(tok)
 	{
 		case BEGIN: 
-			printf("Error BEGIN \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("BEGIN expected \n");
 			break;
 		case READ:
-			printf("Error READ \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("READ expected \n");
 			break;
 		case WRITE: 
-			printf("Error WRITE \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("WRITE expected\n");
 			break;
 		case END:
-			printf("Error END \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("END expected \n");
 			break;
 		case LPAREN:
-			printf("Error LPAREN \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("LPAREN expected \n");
 			break;
 		case RPAREN:
-			printf("Error RPAREN \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("RPAREN expected \n");
 			break;
 		case INTLITERAL:
-			printf("Error INTLITERAL \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("INTLITERAL expected \n");
 			break;
 		case SEMICOLON:
-			printf("Error SEMICOLON \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("SEMICOLON expected \n");
 			break;
 		case ASSIGNOP:
-			printf("Error ASSIGNOP \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("ASSIGNOP expected \n");
 			break;
 		case PLUSOP:
-			printf("Error PLUSOP \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("PLUSOP expected \n");
 			break;
 		case MINUSOP:
-			printf("Error MINUSOP \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("MINUSOP expected \n");
 			break;
 		case SCANEOF: 
-			printf("Error SCANEOF \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("SCANEOF expected \n");
 			break;
 		case ID:
-			printf("Error ID \n");
+			printf("Syntax Error in line %d \n", file_line);
+			//printf("Literal expected\n");
 			break;
 	}
 	exit(0);
 }
-
 token next_token()
 {
 	return current_token;
