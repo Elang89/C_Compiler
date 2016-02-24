@@ -14,59 +14,63 @@ void syntax_error(token tok)
 	switch(tok)
 	{
 		case BEGIN: 
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("BEGIN expected \n");
 			break;
 		case READ:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("READ expected \n");
 			break;
 		case WRITE: 
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("WRITE expected\n");
 			break;
 		case END:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("END expected \n");
 			break;
 		case LPAREN:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("LPAREN expected \n");
 			break;
 		case RPAREN:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("RPAREN expected \n");
 			break;
 		case INTLITERAL:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("INTLITERAL expected \n");
 			break;
 		case SEMICOLON:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("SEMICOLON expected \n");
 			break;
 		case ASSIGNOP:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("ASSIGNOP expected \n");
 			break;
 		case PLUSOP:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("PLUSOP expected \n");
 			break;
 		case MINUSOP:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("MINUSOP expected \n");
 			break;
 		case SCANEOF: 
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("SCANEOF expected \n");
 			break;
 		case ID:
-			printf("Syntax Error in line %d \n", file_line);
+			imprima_error();
 			//printf("Literal expected\n");
 			break;
 	}
 	exit(0);
+}
+void imprima_error()
+{
+	printf("Syntax Error in line %d\n", file_line );
 }
 token next_token()
 {
