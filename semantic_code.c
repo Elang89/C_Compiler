@@ -10,12 +10,12 @@ void generate(string op_code, string op1,
 
 string* extract_expression(expr_rec e)
 {
-	
+	printf("exp extraction");
 }
 
 string* extract_operation(op_rec op)
 {
-
+	printf("operation extraction");
 }
 
 void enter(string s)
@@ -47,6 +47,7 @@ void check_id(string s)
 		generate("Declare", s, "Integer","");
 	}
 }
+
 char * get_temp(void)
 {
 	// max temporary allocated so far
@@ -59,12 +60,12 @@ char * get_temp(void)
 	return tempname;
 }
 
-void start(void)
+void start()
 {
 	// Semantic initializations, none needed
 }
 
-void finish(void)
+void finish()
 {
 	// Generate code to finish program
 	generate("Halt", "", "", "");
@@ -89,6 +90,7 @@ op_rec process_op(void)
 	}
 	return o;
 }
+
 expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 {
 	expr_rec e_rec;
@@ -118,7 +120,7 @@ void read_id(expr_rec in_var)
 
 }
 
-expr_rec process_id(void)
+expr_rec process_id()
 {
 	expr_rec t;
 	// Declare ID and build a

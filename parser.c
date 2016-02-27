@@ -48,12 +48,14 @@ void statement_list()
 
 void statement()
 {
+	expr_rec semantic_record;
 	token tok = next_token();
 	switch(tok)
 	{
 		case ID:
 			// <statement> ::= <expression>;
 			match(ID);
+			semantic_record = process_id();
 			match(ASSIGNOP);
 			expression();
 			match(SEMICOLON);
@@ -92,7 +94,7 @@ void id_list()
 	}
 }
 
-void expression()
+void expression(expr_rec * result)
 {
 	expr_rec left_operand;
 	expr_rec right_operand;
@@ -101,25 +103,27 @@ void expression()
 	*	<expression> ::= <primary>{<add op><primary>}
 	*/
 	
-	primary();
+	primary(& left_operand);
 	
 	while(next_token() == PLUSOP || 
 		next_token() == MINUSOP)
 	{
-		add_op();
-		primary();
+		add_op(& op);
+		primary(& right_operand);
+		left_operand = gen_infix(left_operand, op, right_operand);
 	}
+	*result = left_operand;
 
 }
 
 void expr_list()
 {
 	// <expr_list> ::= <expression>{ , <expression> }
-	expression();
+	expression(NULL);
 	while(next_token() == COMMA)
 	{
 		match(COMMA);
-		expression();
+		expression(NULL);
 	}
 }
 
@@ -138,7 +142,7 @@ void add_op(op_rec *result)
 	}
 }
 
-void primary()
+void primary(expr_rec * record)
 {
 	token tok = next_token();
 
@@ -147,7 +151,7 @@ void primary()
 		case LPAREN:
 			// <primary>(<expression>)
 			match(LPAREN);
-			expression();
+			expression(NULL);
 			match(RPAREN);
 			break;
 		case ID:
