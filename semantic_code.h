@@ -2,7 +2,7 @@
 #define SEMANTIC_CODE_H
 #define MAXIDLEN 33
 
-char list[3300][MAXIDLEN];
+char list[512][MAXIDLEN];
 int list_size;
 
 typedef char string[MAXIDLEN];

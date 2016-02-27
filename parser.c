@@ -106,7 +106,12 @@ void expression(expr_rec * result)
 	/*
 	*	<expression> ::= <primary>{<add op><primary>}
 	*/
-	
+
+	if(result == NULL)
+	{
+		write_expr(*result);
+	}
+
 	primary(& left_operand);
 	
 	for(t = next_token(); t == PLUSOP || t == MINUSOP;
@@ -115,7 +120,6 @@ void expression(expr_rec * result)
 		add_op(& op);
 		primary(& right_operand);
 		left_operand = gen_infix(left_operand, op, right_operand);
-
 	}
 
 	*result = left_operand;
@@ -161,7 +165,7 @@ void primary(expr_rec * record)
 		case LPAREN:
 			// <primary>(<expression>)
 			match(LPAREN);
-			expression(NULL);
+			expression(record);
 			match(RPAREN);
 			break;
 		case ID:

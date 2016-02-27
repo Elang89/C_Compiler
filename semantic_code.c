@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "semantic_code.h"
 #include "token_types.h"
 
@@ -27,12 +28,10 @@ void enter(string s)
 
 int lookup(string s)
 {
-	char element[33];
 	int i;
 	for(i = 0; i < sizeof(list); i++)
 	{
-		strcpy(element, list[i]);
-		if(strcmp(element, s) == 0)
+		if(strcmp(list[i], s))
 		{
 			return 1;
 		}
@@ -49,7 +48,7 @@ void check_id(string s)
 	}
 }
 
-char *get_temp(void)
+char * get_temp()
 {
 	
 	// max temporary allocated so far
@@ -58,7 +57,6 @@ char *get_temp(void)
 
 	max_temp++;
 	sprintf(tempname,"Temp&%d", max_temp);
-	
 	check_id(tempname);
 	return tempname;
 }
@@ -79,7 +77,7 @@ void assign(expr_rec target, expr_rec source)
 	generate("Store", extract_expression(source), target.name, "");
 }
 
-op_rec process_op(void)
+op_rec process_op()
 {
 	// Produce operator descriptor
 	op_rec o;
