@@ -57,7 +57,7 @@ void statement()
 			match(ID);
 			semantic_record = process_id();
 			match(ASSIGNOP);
-			expression();
+			expression(& semantic_record);
 			match(SEMICOLON);
 			break;
 		case READ:
@@ -85,12 +85,15 @@ void statement()
 
 void id_list()
 {
+	expr_rec semantic_record;
 	// <id_list> ::= ID { , ID}
 	match(ID);
 	while(next_token() == COMMA)
 	{
 		match(COMMA);
 		match(ID);
+		semantic_record = process_id();
+		read_id(semantic_record);
 	}
 }
 
@@ -99,19 +102,22 @@ void expression(expr_rec * result)
 	expr_rec left_operand;
 	expr_rec right_operand;
 	op_rec op;
+	token t;
 	/*
 	*	<expression> ::= <primary>{<add op><primary>}
 	*/
 	
 	primary(& left_operand);
 	
-	while(next_token() == PLUSOP || 
-		next_token() == MINUSOP)
+	for(t = next_token(); t == PLUSOP || t == MINUSOP;
+		t = next_token())
 	{
 		add_op(& op);
 		primary(& right_operand);
 		left_operand = gen_infix(left_operand, op, right_operand);
+
 	}
+
 	*result = left_operand;
 
 }
@@ -129,23 +135,27 @@ void expr_list()
 
 void add_op(op_rec *result)
 {
+	op_rec semantic_record;
 	token tok = next_token();
 	// <addop> ::= PLUSOP | MINUSOP 
 	if(tok == PLUSOP || tok == MINUSOP)
 	{
 		match(tok);
+		semantic_record = process_op();
+
 	}
 	else
 	{
 		printf("addop error");
 		syntax_error(tok);
 	}
+	*result = semantic_record;
 }
 
 void primary(expr_rec * record)
 {
 	token tok = next_token();
-
+	expr_rec semantic_record;
 	switch(tok)
 	{
 		case LPAREN:
@@ -157,14 +167,19 @@ void primary(expr_rec * record)
 		case ID:
 			//<primary> ::= ID
 			match(ID);
+			semantic_record = process_id();
+			*record = semantic_record;
 			break;
 		case INTLITERAL:
 			// <primary> ::= INTLITERAL
 			match(INTLITERAL);
+			semantic_record = process_literal();
+			*record = semantic_record;
 			break;
 		default:
 			printf("primary error \n");
 			syntax_error(tok);
 			break; 
 	}
+
 }

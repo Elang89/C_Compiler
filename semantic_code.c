@@ -5,17 +5,18 @@
 void generate(string op_code, string op1,
 	string op2, string result)
 {
+	printf("Print Generate \n");
 
 }
 
-string* extract_expression(expr_rec e)
+char* extract_expression(expr_rec e)
 {
-	printf("exp extraction");
+	printf("exp extraction \n");
 }
 
-string* extract_operation(op_rec op)
+char* extract_operation(op_rec op)
 {
-	printf("operation extraction");
+	printf("operation extraction \n");
 }
 
 void enter(string s)
@@ -48,14 +49,16 @@ void check_id(string s)
 	}
 }
 
-char * get_temp(void)
+char *get_temp(void)
 {
+	
 	// max temporary allocated so far
 	static int max_temp = 0;
 	static char tempname[MAXIDLEN];
 
 	max_temp++;
-	sprintf(tempname, "Temp%d",max_temp);
+	sprintf(tempname,"Temp&%d", max_temp);
+	
 	check_id(tempname);
 	return tempname;
 }
@@ -93,7 +96,10 @@ op_rec process_op(void)
 
 expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 {
+	
+
 	expr_rec e_rec;
+
 	
 	// An expr_rec with temp variant set
 	
@@ -105,6 +111,7 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 	* for result.
 	*
 	*/
+
 
 	strcpy(e_rec.name, get_temp());
 
@@ -129,4 +136,21 @@ expr_rec process_id()
 	t.kind = IDEXPR;
 	strcpy(t.name, token_buffer);
 	return t;
+}
+expr_rec process_literal()
+{
+	expr_rec t;
+	/*
+	 * Convert literal to a numeric representation
+	 * and build semantic record
+	*/
+	 t.kind = LITERALEXPR;
+	 (void) sscanf(token_buffer, "%d",& t.val);
+	 return t;
+}
+
+void write_expr(expr_rec out_expr)
+{
+	generate("Write", extract_expression(out_expr), "Integer","");
+
 }
