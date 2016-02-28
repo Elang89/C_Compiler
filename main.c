@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
 	
 	strcat(new_file_name,".mips");
 	start();
+	finish();
 	
 	//-------------------------------------------------------------------------------
 	system_goal();

@@ -77,13 +77,14 @@ void start()
 	new_file_mips = fopen(new_file_name, "w+");
 	printf("New Mips file was created \n");
 	fprintf(new_file_mips,"Global Main...", "\n");
-	fclose(new_file_mips);
+	
 }
 
 void finish()
 {
 	// Generate code to finish program
 	generate("Halt", "", "", "");
+	fclose(new_file_mips);
 }
 void assign(expr_rec target, expr_rec source)
 {
