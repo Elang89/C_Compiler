@@ -10,6 +10,7 @@
 void system_goal()  // We must match a token sequence generate by program followed bt SCANOF
 {
 	/* <system goal> ::= <program> SCANEOF */
+	
 	program();
 	match(SCANEOF); 
 }
@@ -17,9 +18,11 @@ void system_goal()  // We must match a token sequence generate by program follow
 void program()
 {
 	/* <program> ::= BEGIN <statement list> END*/
+	start();
 	match(BEGIN);
 	statement_list();
 	match(END);
+	finish();
 }
 
 void statement_list()

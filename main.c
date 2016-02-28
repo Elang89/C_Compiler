@@ -29,8 +29,6 @@ int main(int argc, char *argv[])
 	(new_file_name[strlen(file_name)-4] = 0);
 	
 	strcat(new_file_name,".mips");
-	start();
-	finish();
 	
 	//-------------------------------------------------------------------------------
 	system_goal();
