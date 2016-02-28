@@ -74,6 +74,10 @@ char * get_temp()
 void start()
 {
 	// Semantic initializations, none needed
+	new_file_mips = fopen(new_file_name, "w+");
+	printf("New Mips file was created \n");
+	fprintf(new_file_mips,"Global Main...", "\n");
+	fclose(new_file_mips);
 }
 
 void finish()
