@@ -11,6 +11,7 @@ typedef enum token_types{
 
 FILE * file;
 char * file_name;
+char * new_file_name;
 char * output_file_name;
 char token_buffer[128];
 int file_line;
