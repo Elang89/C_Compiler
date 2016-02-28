@@ -76,7 +76,7 @@ void start()
 	// Semantic initializations, none needed
 	new_file_mips = fopen(new_file_name, "w+");
 	printf("New Mips file was created \n");
-	fprintf(new_file_mips,"Text \nGlobal Main \nMain: \n");
+	fprintf(new_file_mips,"#Mips Assembly\n	  .globl main\n\n	  .text\nmain: \n");
 	
 }
 

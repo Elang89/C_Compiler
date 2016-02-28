@@ -1,3 +1,5 @@
-Text 
-Global Main 
-Main: 
+#Mips Assembly
+	  .globl main
+
+	  .text
+main: 
