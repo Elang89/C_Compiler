@@ -10,14 +10,24 @@ void generate(string op_code, string op1,
 
 }
 
-char* extract_expression(expr_rec e)
+char* extract_expression(expr_rec expression)
 {
-	printf("exp extraction \n");
+	char * buffer;	
+	if(expression.kind == TEMPEXPR || expression.kind == IDEXPR) 
+	{
+		return expression.name;
+	}
+	buffer = malloc(sizeof(expression.val));
+	return sprintf(buffer, "%d", expression.val);
 }
 
-char* extract_operation(op_rec op)
+char* extract_operation(op_rec oper)
 {
-	printf("operation extraction \n");
+	if(oper.operator == PLUSOP)
+	{
+		return "add";
+	}
+	return "sub";
 }
 
 void enter(string s)

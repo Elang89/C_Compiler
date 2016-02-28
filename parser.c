@@ -99,6 +99,7 @@ void id_list()
 
 void expression(expr_rec * result)
 {
+	expr_rec temp_rec;
 	expr_rec left_operand;
 	expr_rec right_operand;
 	op_rec op;
@@ -106,10 +107,9 @@ void expression(expr_rec * result)
 	/*
 	*	<expression> ::= <primary>{<add op><primary>}
 	*/
-
-	if(result == NULL)
+	if(result != NULL)
 	{
-		write_expr(*result);
+		temp_rec = *result;
 	}
 
 	primary(& left_operand);
@@ -122,7 +122,17 @@ void expression(expr_rec * result)
 		left_operand = gen_infix(left_operand, op, right_operand);
 	}
 
+
 	*result = left_operand;
+
+	if(temp_rec.kind == IDEXPR)
+	{
+		assign(temp_rec, *result);
+	}
+	else
+	{
+		write_expr(*result);
+	}
 
 }
 

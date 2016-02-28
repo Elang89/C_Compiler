@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
 	list_size = 0;
 	printf(validate_file_path(file_name) ? "File found \n" : "File not found \n");
 	file = fopen(file_name, "r");
+
+
 	system_goal();
 	fclose(file);
 	
@@ -29,3 +31,5 @@ int validate_file_path(const char* path)
 	}
 	return 0;
 }
+
+ 
