@@ -111,11 +111,6 @@ void expression(expr_rec * result)
 	/*
 	*	<expression> ::= <primary>{<add op><primary>}
 	*/
-	if(result != NULL)
-	{
-		temp_rec = *result;
-	}
-
 	primary(& left_operand);
 	
 	for(t = next_token(); t == PLUSOP || t == MINUSOP;
@@ -128,17 +123,19 @@ void expression(expr_rec * result)
 
 	if(result != NULL)
 	{
+		temp_rec = *result;
 		*result = left_operand;
+
+		if(temp_rec.kind == IDEXPR && temp_rec.status != 1)
+		{
+			assign(temp_rec, *result);
+			temp_rec.status = 1;
+		}
 	}
 	else 
 	{
 		write_rec = left_operand;
-		write_expr(left_operand);
-	}
-
-	if(temp_rec.kind == IDEXPR)
-	{
-		assign(temp_rec, *result);
+		write_expr(write_rec);
 	}
 }
 

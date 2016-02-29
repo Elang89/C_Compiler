@@ -82,7 +82,7 @@ void start()
 void finish()
 {
 	// Generate code to finish program
-	fprintf(new_file_mips,"li $v0 , 10 \n");
+	fprintf(new_file_mips,"li $v0, 10 \n");
 	fprintf(new_file_mips, "syscall \n");
 	fclose(new_file_mips);
 }
@@ -124,8 +124,6 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 	* for result.
 	*
 	*/
-
-
 	
 	strcpy(e_rec.name, get_temp());
 	if(op.operator == MINUS)

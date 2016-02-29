@@ -18,6 +18,7 @@ enum expr { IDEXPR, LITERALEXPR, TEMPEXPR };
 typedef struct expression
 {
 	enum expr kind;
+	int status;
 	union{
 		string name; // for IDEXPR, TEMPEXPR
 		int val; // for LITERALEXPR
