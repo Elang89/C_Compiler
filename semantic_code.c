@@ -112,9 +112,7 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 {
 	
 
-	expr_rec e_rec;
-
-	
+	expr_rec e_rec;	
 	// An expr_rec with temp variant set
 	
 	e_rec.kind = TEMPEXPR;
@@ -127,10 +125,18 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 	*/
 
 
+	
 	strcpy(e_rec.name, get_temp());
+	if(op.operatr == PLUS)
+	{
 
-	generate(extract_operation(op), extract_expression(e1), 
-		extract_expression(e2), e_rec.name);
+		e_rec.val = e1.val + e2.val;
+	}
+	else
+	{
+		e_rec.val = e1.val - e2.val;
+	}
+
 	return e_rec;
 }
 
@@ -160,7 +166,6 @@ expr_rec process_literal()
 	 * and build semantic record
 	*/
 	 t.kind = LITERALEXPR;
-	 printf("%d", t.val);
 	 (void) sscanf(current_token_buffer, "%d",& t.val);
 	 return t;
 }

@@ -125,7 +125,7 @@ void expression(expr_rec * result)
 		primary(& right_operand);
 		left_operand = gen_infix(left_operand, op, right_operand);
 	}
-
+	printf("%d", left_operand.val);
 
 	*result = left_operand;
 
