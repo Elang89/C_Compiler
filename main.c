@@ -26,9 +26,9 @@ int main(int argc, char *argv[])
 	
 	strcpy(new_file_name, file_name);
 	
-	(new_file_name[strlen(file_name)-4] = 0);
+	new_file_name[strlen(new_file_name)-4] = 0;
 	
-	strcat(new_file_name,".mips");
+	strcat(new_file_name,".asm");
 	
 	//-------------------------------------------------------------------------------
 	system_goal();

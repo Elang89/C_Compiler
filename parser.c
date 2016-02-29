@@ -59,6 +59,7 @@ void statement()
 			// <statement> ::= <expression>;
 			match(ID);
 			semantic_record = process_id();
+			printf("%s\n",semantic_record.name);
 			match(ASSIGNOP);
 			expression(& semantic_record);
 			match(SEMICOLON);

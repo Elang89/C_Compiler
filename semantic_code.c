@@ -75,8 +75,7 @@ void start()
 {
 	// Semantic initializations, none needed
 	new_file_mips = fopen(new_file_name, "w+");
-	printf("New Mips file was created \n");
-	fprintf(new_file_mips,"#Mips Assembly\n	  .globl main\n\n	  .text\nmain: \n");
+	fprintf(new_file_mips,"#Mips Assembly\n          .data\n	  .globl main\n\n	  .text\nmain: \n\n");
 	
 }
 
@@ -89,6 +88,8 @@ void finish()
 void assign(expr_rec target, expr_rec source)
 {
 	//Generate code for assignment
+	
+	//fprintf(new_file_mips, "%s: .word %s\n",target.name, extract_expression(source));
 	generate("Store", extract_expression(source), target.name, "");
 }
 
@@ -146,6 +147,7 @@ expr_rec process_id()
 	// Declare ID and build a
 	// corresponding semantic record
 	check_id(token_buffer);
+	printf("%s\n",token_buffer);
 	t.kind = IDEXPR;
 	strcpy(t.name, token_buffer);
 	return t;
