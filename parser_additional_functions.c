@@ -12,63 +12,63 @@ void syntax_error(token tok)
 	switch(tok)
 	{
 		case BEGIN: 
-			imprima_error();
+			print_error();
 			//printf("BEGIN expected \n");
 			break;
 		case READ:
-			imprima_error();
+			print_error();
 			//printf("READ expected \n");
 			break;
 		case WRITE: 
-			imprima_error();
+			print_error();
 			//printf("WRITE expected\n");
 			break;
 		case END:
-			imprima_error();
+			print_error();
 			//printf("END expected \n");
 			break;
 		case LPAREN:
-			imprima_error();
+			print_error();
 			//printf("LPAREN expected \n");
 			break;
 		case RPAREN:
-			imprima_error();
+			print_error();
 			//printf("RPAREN expected \n");
 			break;
 		case INTLITERAL:
-			imprima_error();
+			print_error();
 			//printf("INTLITERAL expected \n");
 			break;
 		case SEMICOLON:
-			imprima_error();
+			print_error();
 			//printf("SEMICOLON expected \n");
 			break;
 		case ASSIGNOP:
-			imprima_error();
+			print_error();
 			//printf("ASSIGNOP expected \n");
 			break;
 		case PLUSOP:
-			imprima_error();
+			print_error();
 			//printf("PLUSOP expected \n");
 			break;
 		case MINUSOP:
-			imprima_error();
+			print_error();
 			//printf("MINUSOP expected \n");
 			break;
 		case SCANEOF: 
-			imprima_error();
+			print_error();
 			//printf("SCANEOF expected \n");
 			break;
 		case ID:
-			imprima_error();
+			print_error();
 			//printf("Literal expected\n");
 			break;
 	}
 	exit(0);
 }
-void imprima_error()
+void print_error()
 {
-	printf("Syntax Error in line %d\n", file_line );
+	printf("Syntax Error in line %d\n", (file_line + 1));
 }
 token next_token()
 {

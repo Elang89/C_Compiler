@@ -126,6 +126,7 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 	*/
 	
 	strcpy(e_rec.name, get_temp());
+	
 	if(op.operator == MINUS)
 	{
 		e_rec.val = e1.val - e2.val;
@@ -141,6 +142,7 @@ void read_id(expr_rec in_var)
 {
 	// Generate code for read
 	generate("Read", in_var.name, "Integer", "");
+	fprintf(new_file_mips, "li $t1,%s \n", in_var.name);
 
 }
 
