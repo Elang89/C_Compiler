@@ -59,7 +59,6 @@ void statement()
 			// <statement> ::= <expression>;
 			match(ID);
 			semantic_record = process_id();
-			printf("%s\n",semantic_record.name);
 			match(ASSIGNOP);
 			expression(& semantic_record);
 			match(SEMICOLON);
@@ -104,6 +103,7 @@ void id_list()
 void expression(expr_rec * result)
 {
 	expr_rec temp_rec;
+	expr_rec write_rec;
 	expr_rec left_operand;
 	expr_rec right_operand;
 	op_rec op;
@@ -125,19 +125,21 @@ void expression(expr_rec * result)
 		primary(& right_operand);
 		left_operand = gen_infix(left_operand, op, right_operand);
 	}
-	printf("%d", left_operand.val);
 
-	*result = left_operand;
+	if(result != NULL)
+	{
+		*result = left_operand;
+	}
+	else 
+	{
+		write_rec = left_operand;
+		write_expr(left_operand);
+	}
 
 	if(temp_rec.kind == IDEXPR)
 	{
 		assign(temp_rec, *result);
 	}
-	else
-	{
-		write_expr(*result);
-	}
-
 }
 
 void expr_list()
@@ -178,7 +180,7 @@ void primary(expr_rec * record)
 		case LPAREN:
 			// <primary>(<expression>)
 			match(LPAREN);
-			expression(record);
+			expression(& record);
 			match(RPAREN);
 			break;
 		case ID:

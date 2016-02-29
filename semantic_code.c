@@ -82,7 +82,8 @@ void start()
 void finish()
 {
 	// Generate code to finish program
-	generate("Halt", "", "", "");
+	fprintf(new_file_mips,"li $v0 , 10 \n");
+	fprintf(new_file_mips, "syscall \n");
 	fclose(new_file_mips);
 }
 void assign(expr_rec target, expr_rec source)
@@ -90,7 +91,6 @@ void assign(expr_rec target, expr_rec source)
 	//Generate code for assignment
 	
 	fprintf(new_file_mips, "%s: .word %d \n",target.name, source.val);
-	//generate("Store", extract_expression(source), target.name, "");
 }
 
 op_rec process_op()
@@ -112,7 +112,6 @@ op_rec process_op()
 
 expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 {
-	
 
 	expr_rec e_rec;	
 	// An expr_rec with temp variant set
@@ -137,8 +136,7 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 	{
 		e_rec.val = e1.val + e2.val;
 	}
-
-	return e_rec;
+;	return e_rec;
 }
 
 void read_id(expr_rec in_var)
@@ -173,6 +171,9 @@ expr_rec process_literal()
 
 void write_expr(expr_rec out_expr)
 {
-	generate("Write", extract_expression(out_expr), "Integer","");
+	fprintf(new_file_mips, "li $t0, %d \n", out_expr.val);
+	fprintf(new_file_mips, "li $v0, 1 \n");
+	fprintf(new_file_mips, "add $a0, $t0, $zero \n");
+	fprintf(new_file_mips, "syscall \n");
 
 }

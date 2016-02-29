@@ -1,4 +1,3 @@
 begin
-	h := 4 + 2;
-	read(h,b);  --comment
+	write(10 + 10);
 end
