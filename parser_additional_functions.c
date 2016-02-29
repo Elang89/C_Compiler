@@ -77,7 +77,8 @@ token next_token()
 
 void match(token tok)
 {
-	print_token(current_token);
+	strcpy(current_token_buffer, token_buffer);
+	//print_token(current_token);
 	if(current_token == NULL) 
 	{
 		current_token = scanner();

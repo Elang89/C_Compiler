@@ -1,5 +1,4 @@
 begin
 	h := 1 + 1;
-	b := 2;
 	read(h,b);  --comment
 end

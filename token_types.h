@@ -14,6 +14,7 @@ char * file_name;
 char * new_file_name;
 char * output_file_name;
 char token_buffer[128];
+char current_token_buffer[128];
 int file_line;
 token current_token;
 

@@ -6,7 +6,7 @@
 void generate(string op_code, string op1,
 	string op2, string result)
 {
-	printf("Print Generate \n");
+	//printf("Print Generate \n");
 
 }
 
@@ -146,12 +146,12 @@ expr_rec process_id()
 	expr_rec t;
 	// Declare ID and build a
 	// corresponding semantic record
-	check_id(token_buffer);
-	printf("%s\n",token_buffer);
+	check_id(current_token_buffer);
 	t.kind = IDEXPR;
-	strcpy(t.name, token_buffer);
+	strcpy(t.name, current_token_buffer);
 	return t;
 }
+
 expr_rec process_literal()
 {
 	expr_rec t;
@@ -160,7 +160,8 @@ expr_rec process_literal()
 	 * and build semantic record
 	*/
 	 t.kind = LITERALEXPR;
-	 (void) sscanf(token_buffer, "%d",& t.val);
+	 printf("%d", t.val);
+	 (void) sscanf(current_token_buffer, "%d",& t.val);
 	 return t;
 }
 
