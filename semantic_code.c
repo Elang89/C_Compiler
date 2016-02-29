@@ -89,22 +89,25 @@ void assign(expr_rec target, expr_rec source)
 {
 	//Generate code for assignment
 	
-	//fprintf(new_file_mips, "%s: .word %s\n",target.name, extract_expression(source));
-	generate("Store", extract_expression(source), target.name, "");
+	fprintf(new_file_mips, "%s: .word %d \n",target.name, source.val);
+	//generate("Store", extract_expression(source), target.name, "");
 }
 
 op_rec process_op()
 {
 	// Produce operator descriptor
 	op_rec o;
+	print_token(current_token);
 	if(current_token == PLUSOP)
 	{
+
 		o.operator = PLUS;
 	}
 	else
 	{
 		o.operator = MINUS;
 	}
+
 	return o;
 }
 
@@ -127,12 +130,12 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 
 	
 	strcpy(e_rec.name, get_temp());
-	if(op.operatr == PLUS)
+	if(op.operator == PLUS)
 	{
 
 		e_rec.val = e1.val + e2.val;
 	}
-	else
+	else if(op.operator == MINUS)
 	{
 		e_rec.val = e1.val - e2.val;
 	}
