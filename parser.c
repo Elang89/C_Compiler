@@ -158,9 +158,8 @@ void add_op(op_rec *result)
 	// <addop> ::= PLUSOP | MINUSOP 
 	if(tok == PLUSOP || tok == MINUSOP)
 	{
-		match(tok);
 		semantic_record = process_op();
-
+		match(tok);
 	}
 	else
 	{

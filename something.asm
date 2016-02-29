@@ -5,4 +5,4 @@
 	  .text
 main: 
 
-h: .word -1 
+h: .word 6 

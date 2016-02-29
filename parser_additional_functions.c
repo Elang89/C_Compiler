@@ -98,3 +98,18 @@ void match(token tok)
 		syntax_error(tok);
 	}
 }
+
+token call_scanner()
+{
+	token tok = scanner();
+	if(current_token_buffer == INTLITERAL)
+	{
+		current_token = INTLITERAL;
+	}
+	else 
+	{
+		current_token = ID;
+	}
+
+	return tok;
+}
