@@ -142,7 +142,7 @@ void read_id(expr_rec in_var)
 {
 	// Generate code for read
 	generate("Read", in_var.name, "Integer", "");
-	fprintf(new_file_mips, "li $t1,%s \n", in_var.name);
+	fprintf(new_file_mips, "lw $t1,%s \n", in_var.name);
 
 }
 

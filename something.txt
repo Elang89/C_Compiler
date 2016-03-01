@@ -1,7 +1,10 @@
 begin
 	var := 2 + 1;
+	hola := 4 + 2;
 	h := 1 + 1;
+
 	write(1 + 1, 2 + 2);
-	read(8);
+	read(var,hola);
+	
 end
 

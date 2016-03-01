@@ -67,9 +67,7 @@ void statement()
 			// <Statement> ::= READ(<id list>);
 			match(READ);
 			match(LPAREN);
-			match(INTLITERAL);
-			semantic_record = process_id();
-			read_id(semantic_record);
+			id_list();
 			match(RPAREN);
 			match(SEMICOLON);
 			break;
@@ -91,9 +89,12 @@ void statement()
 void id_list()
 {
 	expr_rec semantic_record;
+	
 	// <id_list> ::= ID { , ID}
 
 	match(ID);
+	semantic_record = process_id();
+	read_id(semantic_record);
 
 	while(next_token() == COMMA)
 	{
