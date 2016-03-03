@@ -23,7 +23,7 @@ char* extract_expression(expr_rec expression)
 
 char* extract_operation(op_rec oper)
 {
-	if(oper.operator == PLUSOP)
+	if(oper.operator == PLUS)
 	{
 		return "add";
 	}
@@ -99,7 +99,6 @@ op_rec process_op()
 	op_rec o;
 	if(current_token == PLUSOP)
 	{
-
 		o.operator = PLUS;
 	}
 	else if(current_token == MINUSOP)
@@ -115,8 +114,27 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 
 	expr_rec e_rec;	
 	// An expr_rec with temp variant set
-	
-	e_rec.kind = TEMPEXPR;
+	if (e1.kind != LITERALEXPR || e2.kind != LITERALEXPR)
+	{
+		e_rec.kind = TEMPEXPR;
+
+		if(e1.kind == IDEXPR && e2.kind == LITERALEXPR) 
+		{
+			fprintf(new_file_mips, "lw $t0, %s \n", e1.name);
+			fprintf(new_file_mips, "li $t1, %d \n", e2.val);
+		}
+		else if(e1.kind == LITERALEXPR && e2.kind == IDEXPR)
+		{
+			fprintf(new_file_mips, "lw $t0, %s \n", e2.name);
+			fprintf(new_file_mips, "li $t1, %d \n", e1.val);
+		}
+		else
+		{
+			fprintf(new_file_mips, "lw $t0, %s \n", e1.name);
+			fprintf(new_file_mips, "lw $t1, %s \n", e2.name);
+		}
+		fprintf(new_file_mips, "%s $t2, $t0, $t1 \n", extract_operation(op));
+	}
 	
 	/*
 	* Generate code for infix operation
@@ -124,18 +142,22 @@ expr_rec gen_infix(expr_rec e1, op_rec op, expr_rec e2)
 	* for result.
 	*
 	*/
-	
-	strcpy(e_rec.name, get_temp());
-	
-	if(op.operator == MINUS)
+	else 
 	{
-		e_rec.val = e1.val - e2.val;
+		e_rec.kind = LITERALEXPR;
+		
+		strcpy(e_rec.name, get_temp());
+		
+		if(op.operator == MINUS)
+		{
+			e_rec.val = e1.val - e2.val;
+		}
+		else
+		{
+			e_rec.val = e1.val + e2.val;
+		}
 	}
-	else
-	{
-		e_rec.val = e1.val + e2.val;
-	}
-;	return e_rec;
+	return e_rec;
 }
 
 void read_id(expr_rec in_var)
