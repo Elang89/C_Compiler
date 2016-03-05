@@ -56,5 +56,5 @@ token check_reserved()
 
 void lexical_error(int character)
 {
-	printf("Error '%c' in line %d. \n", character, file_line);
+	printf("Error '%c' in line %d. \n", character, (file_line + 1));
 }
