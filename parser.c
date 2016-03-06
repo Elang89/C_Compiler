@@ -6,14 +6,16 @@
 #include "parser_additional_functions.h"
 #include "token_types.h"
 #include "semantic_code.h"
-
-void system_goal()  // We must match a token sequence generate by program followed bt SCANOF
+//------------------------------------------------------------------------------
+void system_goal()  // We must match a token sequence generate 
+					//by program followed bt SCANOF
 {
 	/* <system goal> ::= <program> SCANEOF */
 	
 	program();
 	match(SCANEOF); 
 }
+//------------------------------------------------------------------------------
 
 void program()
 {
@@ -24,7 +26,7 @@ void program()
 	match(END);
 	finish();
 }
-
+//------------------------------------------------------------------------------
 void statement_list()
 {
 	/*
@@ -48,7 +50,7 @@ void statement_list()
 		}
 	}
 }
-
+//------------------------------------------------------------------------------
 void statement()
 {
 	expr_rec semantic_record;
@@ -85,7 +87,7 @@ void statement()
 			break;
 	}
 }
-
+//------------------------------------------------------------------------------
 void id_list()
 {
 	expr_rec semantic_record;
@@ -104,7 +106,7 @@ void id_list()
 		read_id(semantic_record);
 	}
 }
-
+//------------------------------------------------------------------------------
 void expression(expr_rec * result)
 {
 	expr_rec temp_rec;
@@ -143,7 +145,7 @@ void expression(expr_rec * result)
 		write_expr(write_rec);
 	}
 }
-
+//------------------------------------------------------------------------------
 void expr_list()
 {
 	// <expr_list> ::= <expression>{ , <expression> }
@@ -172,7 +174,7 @@ void add_op(op_rec *result)
 	}
 	*result = semantic_record;
 }
-
+//------------------------------------------------------------------------------
 void primary(expr_rec * record)
 {
 	token tok = next_token();

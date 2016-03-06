@@ -6,7 +6,7 @@
 #include "token_types.h"
 
 int next_tok_flag; 
-
+//------------------------------------------------------------------------------
 void syntax_error(token tok)
 {
 	switch(tok)
@@ -66,15 +66,17 @@ void syntax_error(token tok)
 	}
 	exit(0);
 }
+//------------------------------------------------------------------------------
 void print_error()
 {
 	printf("Syntax Error in line %d\n", (file_line + 1));
 }
+//------------------------------------------------------------------------------
 token next_token()
 {
 	return current_token;
 }
-
+//------------------------------------------------------------------------------
 void match(token tok)
 {
 	strcpy(current_token_buffer, token_buffer);
@@ -98,7 +100,7 @@ void match(token tok)
 		syntax_error(tok);
 	}
 }
-
+//------------------------------------------------------------------------------
 token call_scanner()
 {
 	token tok = scanner();

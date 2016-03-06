@@ -4,7 +4,7 @@
 #include "scanner.h"
 #include "scanner_additional_functions.h"
 #include "token_types.h"
-
+//------------------------------------------------------------------------------
 token scanner()
 {
 	int input_character;
