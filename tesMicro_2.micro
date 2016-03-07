@@ -1,10 +1,11 @@
 begin
-	variable_one := 6 + 5;
-	hola_mundo := 7 + 2;
-	h := 1 + 1;
+	something := 9 + 1;
+	hola := 4 + 2;
 
 	write(1 + 1, 2 + 2);
-	write(5 + 2, 4 + 4);
-	read(variable_one,h);
+	write(10 + 10, 20 + 20);
+	h := 1 + 1;
+	read(something,hola);
 	
 end
+
